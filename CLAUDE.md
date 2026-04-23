@@ -124,8 +124,52 @@ This is a static site. No API routes, no server code, no Node.js server. Deploy 
 
 ## Educational Curricula Patterns
 
-- **Interactive exercises**: use `useState` for local interaction state; `localStorage` (or a `useLocalStorage` hook) for persistence across sessions.
-- **Progress tracking**: store completion state in `localStorage`, not URL params.
-- **Visualizations**: prefer SVG or Canvas components. Reach for a chart library only when the complexity genuinely demands it.
-- **Step-by-step flows**: a single route with step state in `useState` is simpler than one route per step unless deep-linking to steps is required.
-- **No auth**: these curricula are public and stateless from the server's perspective.
+> Full design specification: `.claude/references/ilr.md`. Read it before building any curriculum content.
+
+### Resource types
+
+All content is either a **Tutorial** or a **Lab** — never a hybrid.
+
+| | Tutorial | Lab |
+|---|---|---|
+| Goal | Teach a concept with guided micro-steps | Synthesise prior concepts into a project |
+| Structure | Multiple short linear lessons | Single comprehensive task |
+| New concepts | Introduced and explained | **Zero** — only applies known concepts |
+| Tasks | Guided, atomic action items | Open-ended User Stories |
+
+### Tutorial lessons — the 2-Minute Rule
+
+Every lesson must be solvable in under 2 minutes. Every lesson must require at least one action — no passive reading. Use "seeded" states (boilerplate, pre-built scaffolding) so learners focus on the specific skill being taught, not setup.
+
+### Interactivity hierarchy
+
+Prioritise in this order — never skip to a lower tier if a higher one is feasible:
+
+1. **Direct manipulation** — live environment (terminal, code editor, logic board, 3D model)
+2. **Simulations & animations** — learner adjusts variables and observes real-time outcomes
+3. **Passive assessment** — multiple-choice or fill-in-the-blank (last resort only)
+
+### Evaluation pattern
+
+Every check must have three parts:
+- **Learner-facing requirement** — a plain sentence stating what the system is looking for
+- **Assertion trace** — a technical error message for debugging (e.g. `expected x < 10, received 14`)
+- **Pedagogical hints** — optional nudges surfaced after failed attempts, without revealing the answer
+
+### State and persistence
+
+- Ephemeral interaction state: `useState`
+- Cross-session persistence: `localStorage` (or a `useLocalStorage` hook)
+- Progress tracking: store completion state in `localStorage`, never URL params
+
+### Gamification
+
+Include stateful visual feedback (distinct states for success vs. failure), a progress indicator, and — where appropriate — engagement hooks such as streaks or achievements.
+
+### Visualizations
+
+Prefer SVG or `<canvas>`. Reach for a third-party chart library only when complexity genuinely demands it.
+
+### No auth
+
+These curricula are public and stateless from the server's perspective.
