@@ -1,29 +1,26 @@
-# Template
+# <>App Name</>
 
-A starter template for building **static educational interactive curricula** with React. Pages are self-contained learning experiences: exercises, visualizations, quizzes, and guided flows. There is no backend — all data is local or fetched from external APIs.
-
-This template is primarily authored by LLMs. Follow all conventions below exactly; do not substitute alternatives.
+Pages are self-contained learning experiences: exercises, visualizations, quizzes, and guided flows. There is no backend - all data is local or fetched from external APIs.
 
 ## Tech Stack
 
-| Tool | Version | Role |
-|---|---|---|
-| React | 19 | UI |
-| TypeScript | ~6 (strict) | Type safety |
-| Vite | 8 | Bundler |
-| Bun | latest | Package manager + runtime |
-| TanStack Router | latest | Routing — file-based in `client/routes/` |
-| TanStack Query | 5 | All async data fetching |
-| Tailwind CSS | v4 | Styling — utility-first, CSS-first config |
-| fCC UIKit | CDN rolling | Design system — tokens, fonts, BEM component classes |
-| shadcn/ui | latest | Complex interactive component primitives only |
+| Tool            | Version     | Role                                                 |
+| --------------- | ----------- | ---------------------------------------------------- |
+| React           | 19          | UI                                                   |
+| TypeScript      | ~6 (strict) | Type safety                                          |
+| Vite            | 8           | Bundler                                              |
+| Bun             | latest      | Package manager + runtime                            |
+| TanStack Router | latest      | Routing - file-based in `client/routes/`             |
+| TanStack Query  | 5           | All async data fetching                              |
+| Tailwind CSS    | v4          | Styling - utility-first, CSS-first config            |
+| fCC UIKit       | CDN rolling | Design system — tokens, fonts, BEM component classes |
+| shadcn/ui       | latest      | Complex interactive component primitives only        |
 
 ## Development
 
 ```bash
 bun dev          # dev server at localhost:5173
 bun run build    # tsc + vite build
-bun run lint     # eslint
 bun run preview  # preview production build
 ```
 
@@ -58,13 +55,13 @@ UIKit classes take precedence over Tailwind utilities for any component that UIK
 The CDN import in `index.css` uses the rolling `latest` bundle:
 
 ```css
-@import url('https://cdn.freecodecamp.org/uikit/styles.min.css');
+@import url("https://cdn.freecodecamp.org/uikit/styles.min.css");
 ```
 
 To pin to a specific version, change the URL:
 
 ```css
-@import url('https://cdn.freecodecamp.org/uikit/0.1.0/styles.min.css');
+@import url("https://cdn.freecodecamp.org/uikit/0.1.0/styles.min.css");
 ```
 
 ### Complex Interactive Components — shadcn/ui
@@ -86,9 +83,9 @@ Wrap **all** async/external data in `useQuery` or `useMutation`:
 
 ```tsx
 const { data } = useQuery({
-  queryKey: ['lessons'],
-  queryFn: () => fetch('/data/lessons.json').then(r => r.json()),
-})
+  queryKey: ["lessons"],
+  queryFn: () => fetch("/data/lessons.json").then((r) => r.json()),
+});
 ```
 
 The `QueryClient` and `QueryClientProvider` must wrap the app (add to `__root.tsx` if not already present).
@@ -101,11 +98,11 @@ New routes are file-based — add files to `client/routes/`. The route tree rege
 
 ```tsx
 // client/routes/lesson.$id.tsx
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/lesson/$id')({
+export const Route = createFileRoute("/lesson/$id")({
   component: LessonPage,
-})
+});
 ```
 
 ### Styling — Tailwind v4 utilities
@@ -130,31 +127,32 @@ This is a static site. No API routes, no server code, no Node.js server. Deploy 
 
 All content is either a **Tutorial** or a **Lab** — never a hybrid.
 
-| | Tutorial | Lab |
-|---|---|---|
-| Goal | Teach a concept with guided micro-steps | Synthesise prior concepts into a project |
-| Structure | Multiple short linear lessons | Single comprehensive task |
-| New concepts | Introduced and explained | **Zero** — only applies known concepts |
-| Tasks | Guided, atomic action items | Open-ended User Stories |
+|              | Tutorial                                | Lab                                      |
+| ------------ | --------------------------------------- | ---------------------------------------- |
+| Goal         | Teach a concept with guided micro-steps | Synthesise prior concepts into a project |
+| Structure    | Multiple short linear lessons           | Single comprehensive task                |
+| New concepts | Introduced and explained                | **Zero** — only applies known concepts   |
+| Tasks        | Guided, atomic action items             | Open-ended User Stories                  |
 
 ### Tutorial lessons — the 2-Minute Rule
 
-Every lesson must be solvable in under 2 minutes. Every lesson must require at least one action — no passive reading. Use "seeded" states (boilerplate, pre-built scaffolding) so learners focus on the specific skill being taught, not setup.
+Every lesson must be solvable in under 2 minutes. Every lesson must require at least one action - no passive reading. Use "seeded" states (boilerplate, pre-built scaffolding) so learners focus on the specific skill being taught, not setup.
 
 ### Interactivity hierarchy
 
-Prioritise in this order — never skip to a lower tier if a higher one is feasible:
+Prioritise in this order - never skip to a lower tier if a higher one is feasible:
 
-1. **Direct manipulation** — live environment (terminal, code editor, logic board, 3D model)
-2. **Simulations & animations** — learner adjusts variables and observes real-time outcomes
-3. **Passive assessment** — multiple-choice or fill-in-the-blank (last resort only)
+1. **Direct manipulation** - live environment (terminal, code editor, logic board, 3D model)
+2. **Simulations & animations** - learner adjusts variables and observes real-time outcomes
+3. **Passive assessment** - multiple-choice or fill-in-the-blank (last resort only)
 
 ### Evaluation pattern
 
 Every check must have three parts:
-- **Learner-facing requirement** — a plain sentence stating what the system is looking for
-- **Assertion trace** — a technical error message for debugging (e.g. `expected x < 10, received 14`)
-- **Pedagogical hints** — optional nudges surfaced after failed attempts, without revealing the answer
+
+- **Learner-facing requirement** - a plain sentence stating what the system is looking for
+- **Assertion trace** - a technical error message for debugging (e.g. `expected x < 10, received 14`)
+- **Pedagogical hints** - optional nudges surfaced after failed attempts, without revealing the answer
 
 ### State and persistence
 
@@ -164,12 +162,8 @@ Every check must have three parts:
 
 ### Gamification
 
-Include stateful visual feedback (distinct states for success vs. failure), a progress indicator, and — where appropriate — engagement hooks such as streaks or achievements.
+Include stateful visual feedback (distinct states for success vs. failure), a progress indicator, and - where appropriate - engagement hooks such as streaks or achievements.
 
 ### Visualizations
 
 Prefer SVG or `<canvas>`. Reach for a third-party chart library only when complexity genuinely demands it.
-
-### No auth
-
-These curricula are public and stateless from the server's perspective.

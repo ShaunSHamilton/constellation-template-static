@@ -1,6 +1,10 @@
 # <>App Name</>
 
 <>
+Implement the app outlined in the @ONESHOT.md file. Use the commit skill to break down the work into small, incremental commits to track progress.
+</>
+
+<>
 Brief description of app - 2/3 sentences
 
 Example:
